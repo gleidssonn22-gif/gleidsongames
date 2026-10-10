@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcadeVerse - Jogos Online Grátis</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Cabeçalho Principal -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-gamepad"></i> <span>ArcadeVerse</span>
+        </div>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Pesquisar jogos...">
+        </div>
+    </header>
+
+    <!-- Menu de Categorias -->
+    <nav class="categories-nav" id="categoryNav">
+        <button class="cat-btn active" data-category="Todos">Todos</button>
+        <button class="cat-btn" data-category="Ação">Ação</button>
+        <button class="cat-btn" data-category="Corrida">Corrida</button>
+        <button class="cat-btn" data-category="Puzzle">Puzzle</button>
+        <button class="cat-btn" data-category="Arcade">Arcade</button>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-container">
+        <section>
+            <h2 class="section-title"><i class="fa-solid fa-fire"></i> Jogos em Destaque</h2>
+            <div class="game-grid" id="gameGrid">
+                <!-- Os cards dos jogos serão injetados aqui via JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 ArcadeVerse. Todos os direitos reservados. Divirta-se sem baixar nada!</p>
+    </footer>
+
+    <!-- Dados e Lógica -->
+    <script src="data/jogos.js"></script>
+    <script>
+        const grid = document.getElementById('gameGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryButtons = document.querySelectorAll('.cat-btn');
+        let categoriaAtual = 'Todos';
+
+        function renderizarJogos(filtro = '', categoria = 'Todos') {
+            grid.innerHTML = '';
+            
+            const jogosFiltrados = jogos.filter(jogo => {
+                const matchTexto = jogo.titulo.toLowerCase().includes(filtro.toLowerCase());
+                const matchCat = categoria === 'Todos' || jogo.categoria === categoria;
+                return matchTexto && matchCat;
+            });
+
+            if (jogosFiltrados.length === 0) {
+                grid.innerHTML = `<p class="no-games">Nenhum jogo encontrado 😢</p>`;
+                return;
+            }
+
+            jogosFiltrados.forEach(jogo => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <div class="card-thumb">
+                        <img src="${jogo.imagem}" alt="${jogo.titulo}" loading="lazy">
+                        <div class="play-overlay">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h3>${jogo.titulo}</h3>
+                        <span class="cat-tag">${jogo.categoria}</span>
+                    </div>
+                `;
+                card.onclick = () => {
+                    window.location.href = `jogo.html?url=${encodeURIComponent(jogo.url)}&nome=${encodeURIComponent(jogo.titulo)}`;
+                };
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtro por texto de busca
+        searchInput.addEventListener('input', (e) => {
+            renderizarJogos(e.target.value, categoriaAtual);
+        });
+
+        // Filtro por categoria
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                categoriaAtual = btn.getAttribute('data-category');
+                renderizarJogos(searchInput.value, categoriaAtual);
+            });
+        });
+
+        // Renderização inicial
+        renderizarJogos();
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #0b0c10;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #12141d;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1f2333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #8b5cf6;
+}
+
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+}
+
+.search-box input {
+    width: 100%;
+    background-color: #1a1d2d;
+    border: 1px solid #2a2f45;
+    padding: 10px 15px 10px 40px;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #8b5cf6;
+}
+
+/* Categorias */
+.categories-nav {
+    background-color: #0e1017;
+    padding: 15px 30px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    border-bottom: 1px solid #191d2b;
+}
+
+.cat-btn {
+    background-color: #161925;
+    border: 1px solid #232738;
+    color: #9ca3af;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.cat-btn:hover, .cat-btn.active {
+    background-color: #8b5cf6;
+    color: white;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Container Principal */
+.main-container {
+    max-width: 1300px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f3f4f6;
+}
+
+.section-title i {
+    color: #f59e0b;
+}
+
+/* Grid de Jogos */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.game-card {
+    background-color: #131622;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #1f2336;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    border-color: #8b5cf6;
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.25);
+}
+
+.card-thumb {
+    position: relative;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.game-card:hover .card-thumb img {
+    transform: scale(1.08);
+}
+
+.play-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 12, 16, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.play-overlay i {
+    background-color: #8b5cf6;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+}
+
+.game-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.card-info {
+    padding: 12px 15px;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cat-tag {
+    font-size: 0.75rem;
+    background-color: #1a1e2f;
+    color: #a78bfa;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.no-games {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #6b7280;
+    padding: 40px;
+    font-size: 1.1rem;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #4b5563;
+    border-top: 1px solid #161925;
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+
+/* Estilo da Página de Jogo (jogo.html) */
+.play-body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.play-header {
+    background-color: #12141d;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #1f2333;
+}
+
+.back-btn {
+    background-color: #1a1d2d;
+    color: #e5e7eb;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+    border: 1px solid #2a2f45;
+}
+
+.back-btn:hover {
+    background-color: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
+.play-header h1 {
+    font-size: 1.1rem;
+    color: #f3f4f6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-container-iframe {
+    flex: 1;
+    width: 100%;
+    background-color: #000;
+}
+
+.game-container-iframe iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    .card-thumb {
+        height: 110px;
+    }
+}

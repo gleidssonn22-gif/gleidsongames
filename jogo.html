@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogando - ArcadeVerse</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="play-body">
+    <!-- Barra Superior do Jogo -->
+    <header class="play-header">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+        <h1 id="gameTitle">Carregando jogo...</h1>
+    </header>
+
+    <!-- Área do Jogo (Iframe) -->
+    <div class="game-container-iframe">
+        <iframe id="gameIframe" src="" allowfullscreen frameborder="0"></iframe>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const urlJogo = params.get('url');
+        const nomeJogo = params.get('nome');
+
+        if (urlJogo && nomeJogo) {
+            document.getElementById('gameIframe').src = decodeURIComponent(urlJogo);
+            document.getElementById('gameTitle').innerText = decodeURIComponent(nomeJogo);
+            document.title = `${decodeURIComponent(nomeJogo)} - ArcadeVerse`;
+        } else {
+            document.getElementById('gameTitle').innerText = "Jogo não encontrado!";
+        }
+    </script>
+</body>
+</html>
